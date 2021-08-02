@@ -1,0 +1,412 @@
+﻿<Page x:Class="StuFinance.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:StuFinance"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="MainPage">
+    
+    <Page.Resources>
+
+        <Style x:Key="font_style" TargetType="TextBlock">
+            <Setter Property="FontFamily"
+                    Value="Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="VerticalAlignment"
+                    Value="Center"/>
+            <Setter Property="HorizontalAlignment"
+                    Value="Left"/>
+            <Setter Property="Foreground"
+                    Value="White"/>
+            <Setter Property="FontSize"
+                    Value="20"/>
+        </Style>
+        <Style TargetType="ToolTip" x:Key="tt_style">
+            <Setter Property="Placement" Value="Right"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Width" Value="150"/>
+            <Setter Property="Margin" Value="20,0,0,0"/>
+            <Setter Property="Background" Value="#4A5668"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="FontFamily" Value="Fonts/Roboto-Light.ttf #Roboto"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="PlacementRectangle" Value="60,0,0,0"/>
+            <Setter Property="HorizontalOffset" Value="15"/>
+            <Setter Property="VerticalOffset" Value="6"/>
+            <Setter Property="HasDropShadow" Value="True"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+        <ImageBrush x:Key="CloseBtn_MouseOver" ImageSource="Assets/closeBtn_MouseOver.png"/>
+        <ImageBrush x:Key="LBtn_MouseOver" ImageSource="Assets/left.png"/>
+        <ImageBrush x:Key="RBtn_MouseOver" ImageSource="Assets/right.png"/>
+        <Style x:Key="Close_btn" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter Property="Background"
+                                        TargetName="button"
+                                        Value="{StaticResource CloseBtn_MouseOver}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="btn_btn" TargetType="{x:Type Button}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border x:Name="button"
+                                BorderThickness="0"
+                                Background="{TemplateBinding Background}"
+                                SnapsToDevicePixels="True">
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="False">
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+        <ImageBrush x:Key="tb_mouse_over"
+                    ImageSource="Assets/tgBtn_MouseOver.png"/>
+        <Style x:Key="tb_style" TargetType="{x:Type ToggleButton}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                        <Border  x:Name="border"
+                                 BorderThickness="{TemplateBinding BorderThickness}"
+                                 Background="{TemplateBinding Background}"
+                                 SnapsToDevicePixels="True">
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="Background"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                                <Setter Property="BorderBrush"
+                                        TargetName="border"
+                                        Value="{StaticResource tb_mouse_over}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+    </Page.Resources>
+    <Grid>
+        <Grid Background="#1E2127">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <Grid   x:Name="nav_pnl"
+                    HorizontalAlignment="Left"
+                    Width="65"
+                    Height="auto"
+                    Background="#2E333A" Grid.RowSpan="4">
+                <StackPanel x:Name="st_pnl">
+                    <!--// Grid for the Menu Toggle Button //-->
+                    <Grid Height="90">
+                        <!--// Menu title text //-->
+                        <TextBlock  Grid.Row="1"
+                                    Grid.Column="0"
+                                    Margin="73,-20,0,0"
+                                    Text="М Е Н Ю"
+                                    Foreground="White"
+                                    FontSize="22"
+                                    Background="Transparent"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center"
+                                    Style="{StaticResource font_style}">                           
+                            <!--// Shadow Effect //-->
+                            <TextBlock.Effect>
+                                <DropShadowEffect  BlurRadius="10"
+                                                   ShadowDepth="1"
+                                                   Direction="-90"
+                                                   Color="White"/>
+                            </TextBlock.Effect>
+                        </TextBlock>
+                        <!--// Toggle Button //-->
+                        <ToggleButton x:Name="Tg_Btn"
+                                      Grid.Column="0"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Left"
+                                      Margin="18,-20,0,0"
+                                      Height="30"
+                                      Width="30"
+                                      BorderThickness="0"
+                                      Style="{StaticResource tb_style}" >
+                            <!--// Toggle button default background image //-->
+                            <ToggleButton.Background>
+                                <ImageBrush ImageSource="Assets/tgBtn_default.png"
+                                            Stretch="None"/>
+                            </ToggleButton.Background>
+                            <!--// Toggle Button - Checked, Unchecked events //-->
+                            <ToggleButton.Triggers>
+                                <EventTrigger RoutedEvent="ToggleButton.Unchecked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="HideStackPanel">
+                                            <DoubleAnimation                                                   
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="250" To="65"
+                                                Duration="0:0:0.2">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="ToggleButton.Checked">
+                                    <BeginStoryboard>
+                                        <Storyboard x:Name="ShowStackPanel">
+                                            <DoubleAnimation
+                                                Storyboard.TargetName="nav_pnl"
+                                                Storyboard.TargetProperty="Width"
+                                                BeginTime="0:0:0"
+                                                From="65" To="250"
+                                                Duration="0:0:0.3">
+                                            </DoubleAnimation>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </ToggleButton.Triggers>
+                        </ToggleButton>
+                    </Grid>
+                    <!--// ListView with menu list items //-->
+                    <ListView  x:Name="LV"
+                               Background="Transparent"
+                               BorderBrush="Transparent"
+                               ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <!--// Photo receipt //-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      PreviewMouseDown="ListViewItem_PreviewMouseDown">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="250" Height="50">
+                                <Image Source="Assets/receipt.png"
+                                       Stretch="None"
+                                       Margin="12,0,0,0"/>
+                                <TextBlock Text="Фото чеков"
+                                           Margin="17,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                           
+                            <!--// Tooltip //-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_receipt"
+                                         Content="Фото чеков"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--// Family member //-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      PreviewMouseDown="ListViewItem_PreviewMouseDown_1">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="250" Height="50">
+                                <Image Source="Assets/img_contact.png"
+                                       Stretch="None"
+                                       Margin="10,0,0,0"/>
+                                <TextBlock Text="Члены семьи"
+                                           Margin="17,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                            <!--// Tooltip //-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_family"
+                                         Content="Члены семьи"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--// Transfer //-->
+                        <ListViewItem HorizontalAlignment="Left"
+                                      Margin="0,0,0,15" MouseEnter="ListViewItem_MouseEnter"
+                                      PreviewMouseDown="ListViewItem_PreviewMouseDown_2">
+                            <StackPanel Orientation="Horizontal"
+                                        Width="250" Height="50">
+                                <Image Source="Assets/moneytransaction.png"
+                                       Stretch="None"
+                                       Margin="12,0,0,0"/>
+                                <TextBlock Text="Перевод средств"
+                                           Margin="17,0,0,0"
+                                           Style="{StaticResource font_style}"/>
+                            </StackPanel>
+                            <!--// Tooltip //-->
+                            <ListViewItem.ToolTip>
+                                <ToolTip x:Name="tt_transfer"
+                                         Content="Перевод средств"
+                                         Style="{StaticResource tt_style}"/>
+                            </ListViewItem.ToolTip>
+                        </ListViewItem>
+                        <!--// Listview items style template //-->
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <Border x:Name="Bd"
+                                                    Height="50"
+                                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                                    Background="{TemplateBinding Background}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    SnapsToDevicePixels="True">
+                                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                                  SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <MultiTrigger>
+                                                    <MultiTrigger.Conditions>
+                                                        <Condition Property="IsMouseOver" Value="True"/>
+                                                    </MultiTrigger.Conditions>
+                                                    <Setter Property="Background"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B"/>
+                                                    <Setter Property="BorderBrush"
+                                                            TargetName="Bd"
+                                                            Value="#404D5B"/>
+                                                </MultiTrigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+            <TextBlock x:Name="month" Typography.Capitals="AllSmallCaps" FontSize="36" Foreground="LightSeaGreen" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="2" Grid.RowSpan="1" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+            </TextBlock>
+            <Button x:Name="RightBtn"
+                    Grid.Column="3"
+                    Grid.Row="0"
+                    BorderThickness = "0"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Height="40"
+                    Width="40"
+                    Click="RightBtn_Click"
+                    Style="{StaticResource btn_btn}">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/right.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="LeftBtn"
+                    Grid.Column="2"
+                    Grid.Row="0"
+                    BorderThickness = "0"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Height="40"
+                    Width="40"
+                    Style="{StaticResource btn_btn}"
+                    Click="LeftBtn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/left.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="CloseBtn"
+                        Grid.Column="4"
+                        Grid.Row="0"
+                        Height="40"
+                        Width="40"
+                        BorderThickness="0"
+                        Style="{StaticResource Close_btn}" Click="CloseBtn_Click" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,20,20,0">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/closeBtn_default.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="svern" Height="35" Width="35" BorderThickness="0" VerticalAlignment="Bottom" Margin="0,0,23,40" Style="{StaticResource btn_btn}" Grid.Column="4" Grid.Row="0" HorizontalAlignment="Right" Click="svern_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/svern.png"/>
+                </Button.Background>
+            </Button>
+            <local:PieChart x:Name="piechartNow" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,50"></local:PieChart>
+            <local:PieChart1 x:Name="piechartBack" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,50"></local:PieChart1>
+            <local:PieChart2 x:Name="piechartBack2" Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,50"></local:PieChart2>
+            <local:PieChartCard x:Name="piechartNowC" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,50"></local:PieChartCard>
+            <local:PieChart1Card x:Name="piechartBackC" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,50"></local:PieChart1Card>
+            <local:PieChart2Card x:Name="piechartBack2C" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Grid.RowSpan="2" Margin="0,0,0,50"></local:PieChart2Card>
+            <Button x:Name="PlusBtn"
+                    Grid.Column="1"
+                    Grid.Row="3"
+                    BorderThickness = "0"
+                    HorizontalAlignment="Right" 
+                    VerticalAlignment="Center"
+                    Height="60"
+                    Width="60"
+                    Style="{StaticResource btn_btn}"
+                    Click="PlusBtn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/minus.png"/>
+                </Button.Background>
+            </Button>
+            <Button x:Name="MinusBtn"
+                    Grid.Column="4"
+                    Grid.Row="3"
+                    BorderThickness = "0"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Center"
+                    Height="60"
+                    Width="60"
+                    Style="{StaticResource btn_btn}"
+                    Click="MinusBtn_Click">
+                <Button.Background>
+                    <ImageBrush ImageSource="Assets/plus.png"/>
+                </Button.Background>
+            </Button>
+            <Grid Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="2" Width="200" Height="100" Background="#2E333A">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <Label Content="БАЛАНС" Grid.Row="0" HorizontalAlignment="Center" FontSize="22" Foreground="White" FontFamily="Montserrat"></Label>
+                <TextBlock x:Name="balancetxt" Grid.Row="1" FontSize="20" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Top">
+                    <Run x:Name="blnc" FontFamily="Montserrat" FontSize="18" Foreground="#FF00CC00"></Run>
+                    <Run x:Name="rub" FontSize="18" Foreground="#FF00CC00">руб.</Run>
+                </TextBlock>
+            </Grid>
+            <Label Grid.Row="3" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Foreground="White" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,65,10">Расход</Label>
+            <Label Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="2" FontSize="18" Foreground="White" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="55,0,0,10">Доход</Label>
+            <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Foreground="White" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50" Content="Наличные"/>
+            <Label Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" FontSize="18" Foreground="White" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,50" Content="Платёжная карта"/>
+            <Label x:Name="labelnal" Grid.Row="2" Grid.RowSpan="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Foreground="#FF00CC00" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Content=""/>
+            <Label x:Name="labelbeznal" Grid.Row="2" Grid.RowSpan="2" Grid.Column="3" Grid.ColumnSpan="2" FontSize="18" Foreground="#FF00CC00" FontFamily="Montserrat" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,10,0,0" Content=""/>
+        </Grid>
+    </Grid>
+</Page>
